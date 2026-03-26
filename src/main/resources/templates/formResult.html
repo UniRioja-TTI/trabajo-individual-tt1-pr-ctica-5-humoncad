@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Welcome</title>
-</head>
-	<body>
-    	<p>Su solicitud se ha realizado. Puede descargar los resultados cuando estén disponibles con el siguiente token:</p>
-		<h1 th:text="${token}"></h1>
-	</body>
-</html>
+<body>
+<div th:if="${token != null}">
+	<p>Su solicitud se ha realizado. Token:</p>
+	<h1 th:text="${token}"></h1>
+	<p><a th:href="@{/grid(tok=${token})}">Ver resultados de la simulación</a></p>
+</div>
+
+<div th:if="${errors != null}" style="color: red;">
+	<h3>Errores en la solicitud:</h3>
+	<ul>
+		<li th:each="err : ${errors}" th:text="${err}"></li>
+	</ul>
+	<a href="/solicitud">Volver a intentar</a>
+</div>
+
+<p th:if="${mensajeError != null}" th:text="${mensajeError}" style="color: orange;"></p>
+</body>

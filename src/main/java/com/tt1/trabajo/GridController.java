@@ -31,10 +31,11 @@ public class GridController {
 		this.ics = ics;
 		this.logger = logger;
 	}
-	
+
 	@GetMapping("/grid")
     public String solicitud(@RequestParam int tok, Model model) {
 		DatosSimulation ds = ics.descargarDatos(tok);
+
         model.addAttribute("count", ds.getAnchoTablero());
         model.addAttribute("maxTime", ds.getMaxSegundos());
         Map<String, String> colors = new HashMap<>();
