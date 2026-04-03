@@ -1,0 +1,19 @@
+# fichero .yml que he utilizado para montar la infraestructura de la p7
+services:
+  mi-web-springboot:
+    image: trabajott1
+    ports:
+      - "8081:8081"
+    networks:
+      - red-privada
+    depends_on:
+      - servicio-externo
+
+  servicio-externo:
+    image: javillour/servicio-tt1:amd64
+    # No incluimos la sección 'ports' aqui para mantenerlo invisible fuera del compose, no queremos exponerlo al exterior
+    networks:
+      - red-privada
+
+networks:
+  red-privada:
